@@ -21,6 +21,10 @@ echo "Starting Secure Environment Setup..."
 echo "Please enter the allowed ports, separated by spaces:"
 read -r -a FIREWALL_PORTS
 
+# Prompt user for disallowed Ports
+echo "Please enter the ports to disallow through the firewall, separated by spaces:"
+read -r -a DISALLOWED_PORTS
+
 # Firewall configuration
 # (not using sudo because this script is run with EUID == 0)
 
@@ -30,16 +34,26 @@ if [ ${#FIREWALL_PORTS[@]} -eq 0 ]; then
 else
     for PORT in "${FIREWALL_PORTS[@]}"; do
         echo "Allowing port $PORT..."
-        firewall-cmd --permanent --add-port=$PORT/tcp
+        firewall-cmd --permanent --zone=public --add-port=$PORT/tcp
     done
-    firewall-cmd --reload
 fi
 
-# Prompt User for Unused Services
+if [ ${#DISALLOWED_PORTS[@]} -eq 0 ]; then
+    echo "No ports provided. Skipping disallowing ports."
+else
+    for PORT in "${DISALLOWED_PORTS[@]}"; do
+        echo "Disallowing port $PORT..."
+        sudo firewall-cmd --permanent --zone=public --remove-port=$PORT/tcp
+    done
+fi
+
+firewall-cmd --reload
+
+# Prompt user for unused services
 echo "Please enter unused services to disable, separated by spaces:"
 read -r -a UNUSED_SERVICES
 
-# Disable Unused Services
+# Disable unused services
 if [ ${#UNUSED_SERVICES[@]} -eq 0 ]; then
     echo "No services provided. Skipping unused services configuration."
 else
