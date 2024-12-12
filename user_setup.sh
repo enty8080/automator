@@ -3,8 +3,7 @@
 # Script Name: secure_setup.sh
 # Author: Ivan Nikolskiy
 # Date Created: 01/12/2024
-# Description: This script configures a secure environment by setting up a firewall,
-#              disabling unused services (provided by the user).
+# Description: This script creates a new user, assigns a home directory, sets a password, and adds them to a group.
 
 # Exit immediately if a command exits with a non-zero status
 set -e
