@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Script Name: memory_dump.sh
+# Script Name: process_exe_dump.sh
 # Author: Ivan Nikolskiy
 # Date Created: 01/12/2024
 # Description: This script takes a process ID and an output file, then it checks if process executable is deleted.
