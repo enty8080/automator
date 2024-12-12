@@ -1,12 +1,15 @@
 #!/bin/bash
 
-# User Creation Script
-# This script prompts the user for details and creates a new Linux user with the specified parameters.
+# Script Name: secure_setup.sh
+# Author: Ivan Nikolskiy
+# Date Created: 01/12/2024
+# Description: This script configures a secure environment by setting up a firewall,
+#              disabling unused services (provided by the user).
 
 # Exit immediately if a command exits with a non-zero status
 set -e
 
-# Check if script is executed with sudo
+# Check for root priviledges (for useradd and passwd)
 if [ "$EUID" -ne 0 ]; then
     echo "This script must be run as root. Please use sudo." >&2
     exit 1
