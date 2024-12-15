@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Script Name: secure_setup.sh
+# Script Name: user_setup.sh
 # Author: Ivan Nikolskiy
 # Date Created: 01/12/2024
 # Description: This script creates a new user, assigns a home directory, sets a password, and adds them to a group.
